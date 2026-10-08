@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Constants {
-    public static Follower create(HardwareMap h) {
+    public static Follower create(HardwareMap hwmap) {
         // return new Follower(Drivetrain, Localizer, Foresight);
         return null;
     }
