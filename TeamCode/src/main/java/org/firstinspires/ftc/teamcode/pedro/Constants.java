@@ -7,11 +7,17 @@ import com.pedropathing.revhub.localizers.PinpointConfig;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.pedropathing.algorithm.Foresight;
+import com.pedropathing.revhub.drivetrains.Mecanum;
+import com.pedropathing.revhub.localizers.PinpointLocalizer;
 
 public class Constants {
     public static Follower create(HardwareMap hwmap) {
-        // return new Follower(Drivetrain, Localizer, Foresight);
-        return null;
+        return new Follower(
+                new PinpointLocalizer(hwmap, localizerConfig),
+                new Mecanum(hwmap, drivetrainConfig),
+                new Foresight(foresightConfig)
+        );
     }
 
     public static MecanumConfig drivetrainConfig = new MecanumConfig(
@@ -28,6 +34,21 @@ public class Constants {
                 c.manualBrakeMode.set(true);
             }
     );
+
+    public static PinpointConfig localizerConfig =
+            new PinpointConfig(c -> {
+                //TEMPORARY TEMPORARY
+                c.name.set("pinpoint");
+                c.xPodOffset.set(1.000);
+                c.yPodOffset.set(1.000);
+                c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+                c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+            });
+
+    public static ForesightConfig foresightConfig =
+            new ForesightConfig(c -> {
+
+            });
 
 
 
