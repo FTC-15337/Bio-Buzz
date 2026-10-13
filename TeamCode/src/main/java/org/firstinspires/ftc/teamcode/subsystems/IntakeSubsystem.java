@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class IntakeSubsystem implements Subsystem {
+public class IntakeSubsystem {
 
     private DcMotor intakeMotor;
     public IntakeSubsystem(HardwareMap hardwareMap) {
@@ -14,9 +14,7 @@ public class IntakeSubsystem implements Subsystem {
     public void collect() {
         intakeMotor.setPower(1);
     }
-    public void update(){
 
-    }
     public void stop() {
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }

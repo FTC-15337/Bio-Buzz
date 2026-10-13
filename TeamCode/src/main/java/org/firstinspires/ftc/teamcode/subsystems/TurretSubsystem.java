@@ -1,11 +1,9 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-public class TurretSubsystem implements Subsystem{
+public class TurretSubsystem {
 
 
-    public void update(){
 
-    }
     public void stop(){
 
     }
