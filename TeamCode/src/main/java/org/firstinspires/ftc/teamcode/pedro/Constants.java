@@ -38,7 +38,11 @@ public class Constants {
     public static PinpointConfig localizerConfig =
             new PinpointConfig(c -> {
                 //TEMPORARY TEMPORARY
-
+                c.name.set("pinpoint");
+                c.xPodOffset.set(1.000);
+                c.yPodOffset.set(1.000);
+                c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+                c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
             });
 
     public static ForesightConfig foresightConfig =
