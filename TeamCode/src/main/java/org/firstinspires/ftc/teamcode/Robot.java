@@ -23,26 +23,26 @@ import java.util.List;
 public class Robot{
     // Adjust these numbers to suit your robot.
     private final double  COUNTS_PER_REV            = 384.5;   //  GoBilda 435 RPM motor (13.7:1 gear)
-    private final double  WHEEL_DIAMETER_IN         = 4.09;    //  GoBilda 96mm Mecanum Wheel
+    private final double  WHEEL_DIAMETER_IN         = 4.09;    //  GoBilda 100mm Mecanum Wheel
 
-    private final double  AXIAL_INCHES_PER_COUNT    = (Math.PI * WHEEL_DIAMETER_IN) / COUNTS_PER_REV;
-    private final double  LATERAL_INCHES_PER_COUNT  = AXIAL_INCHES_PER_COUNT * 0.866;
+    private final double  AXIAL_INCHES_PER_COUNT    = (Math.PI * WHEEL_DIAMETER_IN) / COUNTS_PER_REV; //  the measure of how much the motor/wheel rotates per encoder tick
+    private final double  LATERAL_INCHES_PER_COUNT  = AXIAL_INCHES_PER_COUNT * 0.866; // the measure of how much the robot moves per encoder tick
 
     private static final double DRIVE_GAIN          = 0.03;    // Strength of axial position control
     private static final double DRIVE_ACCEL         = 2.0;     // Acceleration limit.  Percent Power change per second.  1.0 = 0-100% power in 1 sec.
-    private static final double DRIVE_TOLERANCE     = 0.5;     // Controller is is "inPosition" if position error is < +/- this amount
+    private static final double DRIVE_TOLERANCE     = 0.5;     // Controller is "inPosition" if position error is < +/- this amount
     private static final double DRIVE_DEADBAND      = 0.2;     // Error less than this causes zero output.  Must be smaller than DRIVE_TOLERANCE
     private static final double DRIVE_MAX_AUTO      = 0.6;     // "default" Maximum Axial power limit during autonomous
 
     private static final double STRAFE_GAIN         = 0.03;    // Strength of lateral position control
     private static final double STRAFE_ACCEL        = 1.5;     // Acceleration limit.  Percent Power change per second.  1.0 = 0-100% power in 1 sec.
-    private static final double STRAFE_TOLERANCE    = 0.5;     // Controller is is "inPosition" if position error is < +/- this amount
+    private static final double STRAFE_TOLERANCE    = 0.5;     // Controller is "inPosition" if position error is < +/- this amount
     private static final double STRAFE_DEADBAND     = 0.2;     // Error less than this causes zero output.  Must be smaller than DRIVE_TOLERANCE
     private static final double STRAFE_MAX_AUTO     = 0.6;     // "default" Maximum Lateral power limit during autonomous
 
     private static final double YAW_GAIN            = 0.018;    // Strength of Yaw position control
     private static final double YAW_ACCEL           = 3.0;     // Acceleration limit.  Percent Power change per second.  1.0 = 0-100% power in 1 sec.
-    private static final double YAW_TOLERANCE       = 1.0;     // Controller is is "inPosition" if position error is < +/- this amount
+    private static final double YAW_TOLERANCE       = 1.0;     // Controller is "inPosition" if position error is < +/- this amount
     private static final double YAW_DEADBAND        = 0.25;    // Error less than this causes zero output.  Must be smaller than DRIVE_TOLERANCE
     private static final double YAW_MAX_AUTO        = 0.6;     // "default" Maximum Yaw power limit during autonomous
 
@@ -71,7 +71,7 @@ public class Robot{
 
     private LinearOpMode myOpMode;
     private IMU imu;
-    private ElapsedTime holdTimer = new ElapsedTime();  // User for any motion requiring a hold time or timeout.
+    private ElapsedTime holdTimer = new ElapsedTime();  // User for any motion requiring a hold time or timeout. this is an example of invocation
 
     private int startLeftFront = 0;
     private int startRightFront = 0;
@@ -82,17 +82,17 @@ public class Robot{
     private int deltaLeftBack = 0; // for calculating change in the rotation of the wheel
     private int deltaRightBack = 0; // for calculating change in the rotation of the wheel
 
-    private double rawHeading       = 0; // Unmodified heading (degrees)
-    private double headingOffset    = 0; // Used to offset heading
+    private double rawHeading       = 0; // Unmodified heading (degrees), current heading of the robot
+    private double headingOffset    = 0; // Used to offset heading, the difference between target heading and current heading
 
     private double turnRate           = 0; // Latest Robot Turn Rate from IMU (deg / sec)
-    private boolean showTelemetry     = false;
-
+    private boolean showTelemetry     = false; // if this is true then during the robot run you can visually see words on the driver hub
     // Robot Constructor
     public Robot(LinearOpMode opmode) {
         myOpMode = opmode;
     }
 
+    // parameters are variables made in methods
     /**
      * Robot Initialization:
      *  Use the hardware map to Connect to devices.
@@ -101,6 +101,8 @@ public class Robot{
      */
     public void initialize(boolean showTelemetry)
     {
+
+
         // Initialize the hardware variables. Note that the strings used to 'get' each
         // motor/device must match the names assigned during the robot configuration.
 
@@ -117,12 +119,12 @@ public class Robot{
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
 
         }
-        //faster reads
+        //faster reads, reads everything at once
 
         // Tell the software how the Control Hub is mounted on the robot to align the IMU XYZ axes correctly
         RevHubOrientationOnRobot orientationOnRobot =
                 new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                        RevHubOrientationOnRobot.UsbFacingDirection.FORWARD);
+                        RevHubOrientationOnRobot.UsbFacingDirection.LEFT);
         imu.initialize(new IMU.Parameters(orientationOnRobot));
         //SET THIS UP
 

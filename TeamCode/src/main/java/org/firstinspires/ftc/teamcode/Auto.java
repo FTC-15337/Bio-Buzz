@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 public class Auto extends LinearOpMode
 {
     // get an instance of the "Robot" class.
+    ;
     private Robot robot = new Robot(this);
 
     @Override public void runOpMode()
