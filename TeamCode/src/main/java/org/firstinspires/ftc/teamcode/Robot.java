@@ -77,10 +77,10 @@ public class Robot{
     private int startRightFront = 0;
     private int startLeftBack = 0;
     private int startRightBack = 0;
-    private int deltaLeftFront = 0;
-    private int deltaRightFront = 0;
-    private int deltaLeftBack = 0;
-    private int deltaRightBack = 0;
+    private int deltaLeftFront = 0; // for calculating change in the rotation of the wheel
+    private int deltaRightFront = 0; // for calculating change in the rotation of the wheel
+    private int deltaLeftBack = 0; // for calculating change in the rotation of the wheel
+    private int deltaRightBack = 0; // for calculating change in the rotation of the wheel
 
     private double rawHeading       = 0; // Unmodified heading (degrees)
     private double headingOffset    = 0; // Used to offset heading
@@ -115,13 +115,16 @@ public class Robot{
         List<LynxModule> allHubs = myOpMode.hardwareMap.getAll(LynxModule.class);
         for (LynxModule module : allHubs) {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
+
         }
+        //faster reads
 
         // Tell the software how the Control Hub is mounted on the robot to align the IMU XYZ axes correctly
         RevHubOrientationOnRobot orientationOnRobot =
                 new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP,
                         RevHubOrientationOnRobot.UsbFacingDirection.FORWARD);
         imu.initialize(new IMU.Parameters(orientationOnRobot));
+        //SET THIS UP
 
         // zero out all the odometry readings.
         startMotion();
