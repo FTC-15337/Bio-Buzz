@@ -1,10 +1,10 @@
 
-        package org.firstinspires.ftc.teamcode;
+        package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-/*
+        /*
  * This OpMode illustrates an autonomous opmode using Essential Mecanum functions
  * All robot functions are performed by an external "EssentialMecanumRobot" class that manages all hardware interactions.
  * Pure Drive or Strafe motions are maintained using drive-motor encoders
