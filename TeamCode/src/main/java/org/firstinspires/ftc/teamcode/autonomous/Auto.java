@@ -4,6 +4,8 @@
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.mechanisms.Robot;
+
         /*
  * This OpMode illustrates an autonomous opmode using Essential Mecanum functions
  * All robot functions are performed by an external "EssentialMecanumRobot" class that manages all hardware interactions.
@@ -15,7 +17,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 public class Auto extends LinearOpMode
 {
     // get an instance of the "Robot" class.
-    ;
+
     private Robot robot = new Robot(this);
 
     @Override public void runOpMode()
