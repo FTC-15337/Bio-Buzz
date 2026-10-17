@@ -11,6 +11,8 @@ import com.pedropathing.algorithm.Foresight;
 import com.pedropathing.revhub.drivetrains.Mecanum;
 import com.pedropathing.revhub.localizers.PinpointLocalizer;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 public class Constants {
     public static Follower create(HardwareMap hwmap) {
         return new Follower(
@@ -35,16 +37,17 @@ public class Constants {
             }
     );
 
-    public static PinpointConfig localizerConfig =
-            new PinpointConfig(c -> {
-                //TEMPORARY TEMPORARY
-                c.name.set("pinpoint");
-                c.xPodOffset.set(1.594003842571589);
-                c.yPodOffset.set(2.94500576229546);
-                c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
-                c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+    public static PinpointConfig localizerConfig = new PinpointConfig(c -> {
+        c.name.set("pinpoint");
+        c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
+        c.xPodOffset.set(0.1453507603622797);
+        c.yPodOffset.set(0.8695484521820789);
+        c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        c.globalDistanceUnit.set(DistanceUnit.INCH);
+        c.offsetUnits.set(DistanceUnit.INCH);
+    });
 
-            });
 
     public static ForesightConfig foresightConfig =
             new ForesightConfig(c -> {
