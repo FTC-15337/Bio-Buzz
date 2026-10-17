@@ -6,14 +6,13 @@ public class Constants {
 
 
 
-    //for testing services
 
 
     public static double intakeStop = 0.0;
-    public static double turretStop = 0.0;
-    public static double turretMax = 0.1;
-    public static double turretRev = 0.0;
     public static double intakeMax = 0.1;
+    public static double turretMax = 0.1;
+    public static double turretStop = 0;
+    public static double turretRev = 0;
 
 
     public static double intakeRev = -0.1;}

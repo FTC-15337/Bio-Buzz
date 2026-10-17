@@ -6,27 +6,22 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Constants;
 
 public class Turret {
+
     public DcMotor turretMotor;
 
     public void init(HardwareMap hwmap){
         turretMotor = hwmap.get(DcMotor.class,"turret");
-        turretMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        turretMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODERS);
         turretMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-
     }
 
-    public void turretMotorStop(){
+    public void TurretMotorStop(){
         turretMotor.setPower(Constants.turretStop);
-
     }
-    public void turretMotorMax(){
+    public void TurretMotorMax(){
         turretMotor.setPower(Constants.turretMax);
     }
-    public void turretMotorReverse(){
+    public void TurretMotorReverse(){
         turretMotor.setPower(Constants.turretRev);
-
     }
-
-
 }

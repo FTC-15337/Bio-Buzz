@@ -1,16 +1,14 @@
 package org.firstinspires.ftc.teamcode.teleop;
-import org.firstinspires.ftc.teamcode.mechanisms.*;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "TestCode")
+import org.firstinspires.ftc.teamcode.mechanisms.Intake;
+import org.firstinspires.ftc.teamcode.mechanisms.Turret;
+
 
 public class TestCode extends OpMode {
-
-        Turret turret = new Turret();
-        Intake intake = new Intake();
-
+    Turret turret = new Turret();
+    Intake intake = new Intake();
     public void init(){
         turret.init(hardwareMap);
         intake.init(hardwareMap);
@@ -18,19 +16,17 @@ public class TestCode extends OpMode {
     }
     public void loop(){
         if(gamepad1.left_bumper){
-            turret.turretMotorReverse();
-
+            turret.TurretMotorReverse();
         }
         else if(gamepad1.right_bumper){
-            turret.turretMotorMax();
+            turret.TurretMotorMax();
         }
         else{
-            turret.turretMotorStop();
+            turret.TurretMotorStop();
         }
 
         if(gamepad1.a){
             intake.IntakeMotorReverse();
-
         }
         else if(gamepad1.x){
             intake.IntakeMotorMax();
