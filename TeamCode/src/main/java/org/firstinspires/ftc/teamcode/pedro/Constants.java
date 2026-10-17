@@ -39,10 +39,11 @@ public class Constants {
             new PinpointConfig(c -> {
                 //TEMPORARY TEMPORARY
                 c.name.set("pinpoint");
-                c.xPodOffset.set(1.000);
-                c.yPodOffset.set(1.000);
+                c.xPodOffset.set(1.594003842571589);
+                c.yPodOffset.set(2.94500576229546);
                 c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
                 c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+
             });
 
     public static ForesightConfig foresightConfig =
