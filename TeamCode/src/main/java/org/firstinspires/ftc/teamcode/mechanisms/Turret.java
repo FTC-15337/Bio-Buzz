@@ -19,9 +19,9 @@ public class Turret {
         turretMotor.setPower(Constants.turretStop);
     }
     public void TurretMotorMax(){
-        turretMotor.setPower(Constants.turretMax);
+        turretMotor.setPower(Constants.turretRev);
     }
     public void TurretMotorReverse(){
-        turretMotor.setPower(Constants.turretRev);
+        turretMotor.setPower(Constants.turretMax);
     }
 }
