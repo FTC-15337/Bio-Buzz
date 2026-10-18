@@ -32,7 +32,7 @@ public class TestCode extends OpMode {
 
     }
     public void loop(){
-        double forward, rotate, starfe;
+        double forward, rotate, strafe;
         if(gamepad1.left_bumper){
             turret.TurretMotorReverse();
         }
@@ -54,8 +54,8 @@ public class TestCode extends OpMode {
         }
         forward = -gamepad1.left_stick_y;
         rotate = gamepad1.right_stick_x;
-        starfe = gamepad1.left_stick_x;
-        drive.driveFieldRelative(forward,starfe,rotate);
+        strafe = gamepad1.left_stick_x;
+        drive.driveFieldRelative(forward,strafe,rotate);
 
     }
 }
