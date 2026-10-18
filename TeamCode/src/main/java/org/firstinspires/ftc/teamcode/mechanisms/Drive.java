@@ -22,8 +22,7 @@ public class Drive {
         rightBack = hwmap.get(DcMotor.class, "backRight");
 
 
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
 
