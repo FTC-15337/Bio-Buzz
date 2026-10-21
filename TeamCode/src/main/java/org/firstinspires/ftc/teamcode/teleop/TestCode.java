@@ -23,7 +23,6 @@ public class TestCode extends OpMode {
         drive.init(hardwareMap);
 
         //speeds up the code execution by reading all hardware maps at once
-
         List<LynxModule> allHubs = TestCode.hardwareMap.getAll(LynxModule.class);
         for (LynxModule module : allHubs) {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
