@@ -32,7 +32,7 @@ public class AutoAlignTestCode extends OpMode {
    double lastTime = 0;
    // drive setup
 
-    double forward,strafe,rotate;
+    double forward, strafe, rotate;
     double[] stepSizes = {0.01,0.001,0.0001,0.00001};
     int stepIndex = 2;
 
@@ -58,13 +58,13 @@ public class AutoAlignTestCode extends OpMode {
        if(gamepad1.left_trigger > 0.3 ){
            if (result != null && result.isValid()){
                error = goalX - result.getTx();
-               if(Math.abs(error)<angleTolerance){
+               if(Math.abs(error) < angleTolerance){
                    rotate = 0;
                    lastError = error;
                    lastTime = getRuntime();
                }
                else{
-                   double pTerm = error *kP;
+                   double pTerm = error * kP;
                    curTime = getRuntime();
                    double dT = curTime - lastTime;
                    double dTerm = 0;
@@ -76,12 +76,12 @@ public class AutoAlignTestCode extends OpMode {
                    lastError = error;
                    lastTime = curTime;
                }
-           }else{
+           } else {
                lastTime = getRuntime();
                lastError = 0;
            }
 
-       }else{
+       } else {
            lastTime = getRuntime();
            lastError = 0;
        }
@@ -91,18 +91,18 @@ public class AutoAlignTestCode extends OpMode {
            stepIndex = (stepIndex+1) % stepSizes.length;
        }
        if (gamepad1.dpadRightWasPressed()){
-           kP-= stepSizes[stepIndex];
+           kP -= stepSizes[stepIndex];
        }
        if(gamepad1.dpadLeftWasPressed()){
-           kP+=stepSizes[stepIndex];
+           kP += stepSizes[stepIndex];
        }
        if(gamepad1.dpadUpWasPressed()){
-           kD+=stepSizes[stepIndex];
+           kD += stepSizes[stepIndex];
        }
        if(gamepad1.dpadDownWasPressed()){
-           kD-=stepSizes[stepIndex];
+           kD -= stepSizes[stepIndex];
        }
-       if(result!= null && result.isValid()){
+       if(result != null && result.isValid()){
            if (gamepad1.left_trigger>0.3){
                telemetry.addLine("AUTO ALIGN");
 
