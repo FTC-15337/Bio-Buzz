@@ -10,7 +10,8 @@ public class Intake {
     private DcMotor intakeMotorRight1;
 
 
-    private DcMotor intakeMotor;
+    private
+    DcMotor intakeMotor;
 
     public void init(HardwareMap hwmap){
         intakeMotor = hwmap.get(DcMotor.class, "intake");
