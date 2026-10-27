@@ -6,7 +6,7 @@ public class Constants {
 
 
     public static double intakeStop = 0.0;
-    public static double intakeMax = 1;
+    public static double intakeMax = 0.5;
     public static double turretMax = 0.1;
     public static double turretStop = 0;
     public static double turretRev = -0.1;
