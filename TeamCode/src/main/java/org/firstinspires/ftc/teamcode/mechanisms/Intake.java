@@ -4,7 +4,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Constantsfile;
 
 public class Intake {
     private DcMotor intakeMotorRight1;
@@ -20,15 +20,15 @@ public class Intake {
     }
 
     public void IntakeMotorStop(){
-        intakeMotor.setPower(Constants.intakeStop);
+        intakeMotor.setPower(Constantsfile.intakeStop);
     }
 
     public void IntakeMotorMax(){
-        intakeMotor.setPower(Constants.intakeMax);
+        intakeMotor.setPower(Constantsfile.intakeMax);
     }
 
     public void IntakeMotorReverse(){
-        intakeMotor.setPower(Constants.intakeRev);
+        intakeMotor.setPower(Constantsfile.intakeRev);
     }
 
 

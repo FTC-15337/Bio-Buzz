@@ -44,6 +44,20 @@ public class TestCode extends OpMode {
             shooter.shoot(0);
         }
 
+//        if (gamepad1.a){
+//            shooter.shoot(0.5);
+//            intake.IntakeMotorMax();
+//            if (gamepad1.b){
+//                nudge.move(1);
+//                shooter.shoot(0.5);
+//                intake.IntakeMotorMax();
+//            }
+//        }else {
+//            shooter.shoot(0);
+//            intake.IntakeMotorStop();
+//            nudge.move(0);
+//        }
+
         if (gamepad1.b){
             nudge.move(1);
         }else {
