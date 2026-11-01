@@ -28,16 +28,16 @@ public class TestCode extends OpMode {
 
     }
     public void loop(){
-        if (gamepad1.x){
+        if (gamepad2.left_trigger_pressed){
             intake.IntakeMotorMax();
 
-        } else if (gamepad1.y) {
+        } else if (gamepad1.right_trigger_pressed) {
             intake.IntakeMotorReverse();
         } else {
             intake.IntakeMotorStop();
         }
         if (gamepad1.left_bumper){
-            shooter.shoot(0.5);
+            shooter.shoot(0.75);
         } else if (gamepad1.right_bumper) {
             shooter.shoot(-0.5);
         }else {
@@ -59,8 +59,10 @@ public class TestCode extends OpMode {
 //        }
 
         if (gamepad1.b){
+            nudge.move(-1);
+        }else if (gamepad2.a){
             nudge.move(1);
-        }else {
+        } else {
             nudge.move(0);
         }
         double forward, rotate, strafe;
@@ -71,6 +73,8 @@ public class TestCode extends OpMode {
         rotate = gamepad1.right_stick_x;
         strafe = gamepad1.left_stick_x;
         drive.driveFieldRelative(forward,strafe,rotate);
+        telemetry.addData("Heading:",drive.Heading() );
+
 
     }
 }
