@@ -25,27 +25,34 @@ public class TestCode extends OpMode {
         drive.init(hardwareMap);
         nudge.init(hardwareMap);
         shooter.init(hardwareMap);
-        flywheel.init();
+
 
 
 
     }
     public void loop(){
-        if (gamepad1.x){
+        double speed = 0.5;
+        if (gamepad2.dpad_up){
+            speed +=-0.1;
+        }else if (gamepad2.dpad_up){
+            speed -=0.1;
+        }
+        if (gamepad2.left_trigger_pressed){
             intake.IntakeMotorMax();
 
-        } else if (gamepad1.y) {
+        } else if (gamepad2.right_trigger_pressed) {
             intake.IntakeMotorReverse();
         } else {
             intake.IntakeMotorStop();
         }
-        if (gamepad1.left_bumper){
-            shooter.ShooterMotorMax();
-        } else if (gamepad1.right_bumper) {
-            shooter.ShooterMotorReverse();
-        }else {
-            shooter.ShooterMotorStop();
+        if (gamepad2.right_bumper) {
+            shooter.spinUp();
+        } else {
+            shooter.stop();
         }
+
+        telemetry.addData("Shooter speed", shooter.getVelocity());
+        telemetry.addData("Ready", shooter.isReady());
 
 //        if (gamepad1.right_trigger_pressed){
 //            shooter.ShooterMotorMax();
@@ -61,10 +68,10 @@ public class TestCode extends OpMode {
 //            nudge.move(0);
 //        }
 
-        if (gamepad1.b){
+        if (gamepad2.b){
             nudge.NudgeMotorMax();
 
-        }else if(gamepad1.a){
+        }else if(gamepad2.y){
             nudge.NudgeMotorReverse();
         }
         else {
