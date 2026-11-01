@@ -39,13 +39,15 @@ public class PracticeTestPedroPathingSample extends OpMode {
     public void statePathUpdate(){
         switch(pathState){
             case SHOOT_PRELOAD:
-                intake.IntakeMotorMax();
-                nudge.NudgeMotorMax();
-                shooter.ShooterMotorMax();
+                shooter.spinUp();
 
+                if(pathTimer.seconds()>8){
+                    nudge.NudgeMotorMax();
+                    intake.IntakeMotorMax();
 
-                if(pathTimer.seconds()>1.5){
-                    shooter.ShooterMotorStop();
+                }
+                else if(pathTimer.seconds()>10){
+                    shooter.stop();
                     nudge.NudgeMotorStop();
                     intake.IntakeMotorStop();
                     follower.follow(driveAwayPath);
