@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.teamcode.Constantsfile;
 
 public class Nudge {
     private DcMotor nudge;
@@ -11,7 +12,13 @@ public class Nudge {
         nudge.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
-    public void move(double speed){
-        nudge.setPower(speed);
-    }
+   public void NudgeMotorMax(){
+        nudge.setPower(Constantsfile.nudgeMax);
+   }
+   public void NudgeMotorReverse(){
+        nudge.setPower(Constantsfile.nudgeRev);
+   }
+   public void NudgeMotorStop(){
+        nudge.setPower(Constantsfile.nudgeStop);
+   }
 }
