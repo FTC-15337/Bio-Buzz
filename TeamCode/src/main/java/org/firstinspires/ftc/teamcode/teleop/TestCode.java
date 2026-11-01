@@ -47,6 +47,9 @@ public class TestCode extends OpMode {
         }
         if (gamepad2.right_bumper) {
             shooter.spinUp();
+        }else if(gamepad2.left_bumper){
+            shooter.reverse();
+
         } else {
             shooter.stop();
         }

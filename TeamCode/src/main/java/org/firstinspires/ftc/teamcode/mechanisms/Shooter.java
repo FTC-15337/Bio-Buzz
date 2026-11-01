@@ -13,7 +13,8 @@ public class Shooter {
 
         private DcMotorEx shooter;
 
-        private double targetVelocity = 1375;   // ticks per second (about 4,500 RPM)
+
+        private double targetVelocity = 1500;   // ticks per second (about 4,500 RPM)
         private double tolerance = 50;          // how close counts as "ready"
 
         public void init(HardwareMap hwmap) {
@@ -28,6 +29,9 @@ public class Shooter {
 
         public void stop() {
             shooter.setVelocity(0);
+        }
+        public void reverse(){
+            shooter.setVelocity(-500);
         }
 
         public boolean isReady() {

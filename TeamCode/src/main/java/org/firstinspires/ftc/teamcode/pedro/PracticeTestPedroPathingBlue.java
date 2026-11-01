@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
 
 @Autonomous
 
-public class PracticeTestPedroPathingSample extends OpMode {
+public class PracticeTestPedroPathingBlue extends OpMode {
     private Follower follower;
     private Timer pathTimer, opModeTimer;
     Shooter shooter = new Shooter();
@@ -30,9 +30,9 @@ public class PracticeTestPedroPathingSample extends OpMode {
 
     }
     PathState pathState;
-    private final Pose startPose = new Pose(56,8,Math.toRadians(90));
-    private final Pose shootingPose = new Pose(56,8,Math.toRadians(90));
-    private final Pose endPose = new Pose(7.63,98.75,Math.toRadians(180));
+    private final Pose startPose = new Pose(82.3723745428141,131.86958100258175,Math.toRadians(270));
+    private final Pose shootingPose = new Pose(82.3723745428141,131.86958100258175,Math.toRadians(270));
+    private final Pose endPose = new Pose(138.42,40.78,Math.toRadians(270));
     private Path driveAwayPath;
 
 
@@ -58,7 +58,7 @@ public class PracticeTestPedroPathingSample extends OpMode {
             case DRIVE_AWAY:
                 if (!follower.isBusy()) {
                     setPathState(PathState.IDLE);
-              
+
                 }
                 break;
             case IDLE:
