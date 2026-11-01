@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.mechanisms.Drive;
+import org.firstinspires.ftc.teamcode.mechanisms.FlywheelTunerTutorial;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.mechanisms.Nudge;
 import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
@@ -16,6 +17,7 @@ public class TestCode extends OpMode {
     Intake intake = new Intake();
     Drive drive = new Drive();
     Nudge nudge = new Nudge();
+    FlywheelTunerTutorial flywheel = new FlywheelTunerTutorial();
     Shooter shooter = new Shooter();
     public void init(){
 //        turret.init(hardwareMap);
@@ -23,8 +25,9 @@ public class TestCode extends OpMode {
         drive.init(hardwareMap);
         nudge.init(hardwareMap);
         shooter.init(hardwareMap);
+        flywheel.init();
 
-        //speeds up the code execution by reading all hardware maps at once
+
 
     }
     public void loop(){
@@ -37,17 +40,17 @@ public class TestCode extends OpMode {
             intake.IntakeMotorStop();
         }
         if (gamepad1.left_bumper){
-            shooter.shoot(0.5);
+            shooter.ShooterMotorMax();
         } else if (gamepad1.right_bumper) {
-            shooter.shoot(-0.5);
+            shooter.ShooterMotorReverse();
         }else {
-            shooter.shoot(0);
+            shooter.ShooterMotorStop();
         }
 
-//        if (gamepad1.a){
-//            shooter.shoot(0.5);
+//        if (gamepad1.right_trigger_pressed){
+//            shooter.ShooterMotorMax();
 //            intake.IntakeMotorMax();
-//            if (gamepad1.b){
+//           if (gamepad1.b){
 //                nudge.move(1);
 //                shooter.shoot(0.5);
 //                intake.IntakeMotorMax();
@@ -59,9 +62,13 @@ public class TestCode extends OpMode {
 //        }
 
         if (gamepad1.b){
-            nudge.move(1);
-        }else {
-            nudge.move(0);
+            nudge.NudgeMotorMax();
+
+        }else if(gamepad1.a){
+            nudge.NudgeMotorReverse();
+        }
+        else {
+            nudge.NudgeMotorStop();
         }
         double forward, rotate, strafe;
         if (gamepad1.a){
