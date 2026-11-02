@@ -14,7 +14,7 @@ public class Shooter {
         private DcMotorEx shooter;
 
 
-        private double targetVelocity = 1500;   // ticks per second (about 4,500 RPM)
+        private double targetVelocity = 800;   // ticks per second (about 4,500 RPM)
         private double tolerance = 50;          // how close counts as "ready"
 
         public void init(HardwareMap hwmap) {
@@ -23,8 +23,8 @@ public class Shooter {
             shooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
 
-        public void spinUp() {
-            shooter.setVelocity(targetVelocity);
+        public void spinUp(double s) {
+            shooter.setVelocity(s);
         }
 
         public void stop() {

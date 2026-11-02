@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.teleop;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -19,6 +20,10 @@ public class TestCode extends OpMode {
     Nudge nudge = new Nudge();
     FlywheelTunerTutorial flywheel = new FlywheelTunerTutorial();
     Shooter shooter = new Shooter();
+    ElapsedTime nudgeTimer = new ElapsedTime();
+    boolean nudging = false;
+    boolean previousB = false;
+    double nudgeDuration = 0.20;
     public void init(){
 //        turret.init(hardwareMap);
         intake.init(hardwareMap);
@@ -29,14 +34,22 @@ public class TestCode extends OpMode {
 
 
 
+
     }
+    double Target = 1300;
+    boolean previousAState = false;
     public void loop(){
-        double speed = 0.5;
-        if (gamepad2.dpad_up){
-            speed +=-0.1;
-        }else if (gamepad2.dpad_up){
-            speed -=0.1;
+        if (gamepad1.a && !previousAState) {
+            Target += 20;
         }
+
+
+        previousAState = gamepad1.a;
+
+        telemetry.addData("Variable Value", Target);
+        telemetry.update();
+
+
         if (gamepad2.left_trigger_pressed){
             intake.IntakeMotorMax();
 
@@ -46,7 +59,7 @@ public class TestCode extends OpMode {
             intake.IntakeMotorStop();
         }
         if (gamepad2.right_bumper) {
-            shooter.spinUp();
+            shooter.spinUp(Target);
         }else if(gamepad2.left_bumper){
             shooter.reverse();
 
@@ -71,15 +84,26 @@ public class TestCode extends OpMode {
 //            nudge.move(0);
 //        }
 
-        if (gamepad2.b){
-            nudge.NudgeMotorMax();
+        boolean currentB = gamepad2.b;
 
-        }else if(gamepad2.y){
+        if (gamepad2.y) {
+            nudging = false;
             nudge.NudgeMotorReverse();
+        } else {
+            if (currentB && !previousB && !nudging) {
+                nudging = true;
+                nudgeTimer.reset();
+            }
+
+            if (nudging && nudgeTimer.seconds() < nudgeDuration) {
+                nudge.NudgeMotorMax();
+            } else {
+                nudging = false;
+                nudge.NudgeMotorStop();
+            }
         }
-        else {
-            nudge.NudgeMotorStop();
-        }
+
+        previousB = currentB;
         double forward, rotate, strafe;
         if (gamepad1.a){
             drive.Reset();
