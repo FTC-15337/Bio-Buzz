@@ -85,10 +85,10 @@ public class AutoAlignTestCode extends OpMode {
            lastTime = getRuntime();
            lastError = 0;
        }
-       drive.drive(forward,strafe,rotate);
+       drive.drive(forward, strafe, rotate);
 
        if (gamepad1.bWasPressed()) {
-           stepIndex = (stepIndex+1) % stepSizes.length;
+           stepIndex = (stepIndex + 1) % stepSizes.length;
        }
        if (gamepad1.dpadRightWasPressed()){
            kP -= stepSizes[stepIndex];
@@ -108,15 +108,15 @@ public class AutoAlignTestCode extends OpMode {
 
            }
 
-           telemetry.addData("error",error);
+           telemetry.addData("error", error);
        }
        else{
            telemetry.addLine("MANUAL ROTATE MODE");
        }
        telemetry.addLine("----------------------");
        telemetry.addData("Tuning P","%.4F (Dpad l/r", kP);
-       telemetry.addData("Tuning D","%.4F(dpad u/d)",kD);
-       telemetry.addData("Step Size","%.4F(b button)",stepSizes[stepIndex]);
+       telemetry.addData("Tuning D","%.4F(dpad u/d)", kD);
+       telemetry.addData("Step Size","%.4F(b button)", stepSizes[stepIndex]);
        telemetry.update();
 
 

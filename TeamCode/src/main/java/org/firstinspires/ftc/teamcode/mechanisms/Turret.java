@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Constantsfile;
 
 public class Turret {
 
@@ -16,13 +16,13 @@ public class Turret {
     }
 
     public void TurretMotorStop(){
-        turretMotor.setPower(Constants.turretStop);
+        turretMotor.setPower(Constantsfile.turretStop);
     }
     public void TurretMotorMax(){
-        turretMotor.setPower(Constants.turretRev);
+        turretMotor.setPower(Constantsfile.turretRev);
     }
     public void TurretMotorReverse(){
-        turretMotor.setPower(Constants.turretMax);
+        turretMotor.setPower(Constantsfile.turretMax);
     }
 }
 
