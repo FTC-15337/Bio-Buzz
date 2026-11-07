@@ -44,6 +44,10 @@ public class Shooter {
         public void setTargetVelocity(double velocity) {
             targetVelocity = velocity;
         }
+
+        public void reverse() {
+            shooter.setVelocity(-400);
+        }
     }
 
 

@@ -54,10 +54,23 @@ public class TestCode extends OpMode {
             intake.IntakeMotorStop();
         }
         if (gamepad2.right_bumper) {
-            shooter.spinUp();
+            shooter.reverse();
         } else {
             shooter.stop();
         }
+        if (gamepad2.x) {
+            shooter.spinUp();
+            if (shooter.isReady()) {
+                intake.IntakeMotorMax();
+                nudge.NudgeMotorMax();
+                shooter.spinUp();
+            }
+        } else {
+            shooter.stop();
+            intake.IntakeMotorStop();
+            nudge.NudgeMotorStop();
+        }
+
         if (gamepad1.bWasPressed()) {
             AutoAlign.loop();
         }
