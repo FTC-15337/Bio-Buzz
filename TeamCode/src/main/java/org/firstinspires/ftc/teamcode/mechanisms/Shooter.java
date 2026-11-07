@@ -8,18 +8,21 @@ import org.firstinspires.ftc.teamcode.Constantsfile;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 public class Shooter {
 
         private DcMotorEx shooter;
+        private double targetVelocity = 1180;
 
-        private double targetVelocity = 1375;   // ticks per second (about 4,500 RPM)
-        private double tolerance = 50;          // how close counts as "ready"
+        private double tolerance = 50;
 
         public void init(HardwareMap hwmap) {
             shooter = hwmap.get(DcMotorEx.class, "shooter");
             shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             shooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+//            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,
+//                    new PIDFCoefficients(3, 0.001, 0, 15));
         }
 
         public void spinUp() {

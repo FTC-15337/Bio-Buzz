@@ -10,6 +10,8 @@ import org.firstinspires.ftc.teamcode.mechanisms.Nudge;
 import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
 import org.firstinspires.ftc.teamcode.mechanisms.Turret;
 
+import java.lang.annotation.Target;
+
 @TeleOp
 public class TestCode extends OpMode {
 
@@ -30,12 +32,20 @@ public class TestCode extends OpMode {
 
 
     }
+    double target = 1025;
+
+
     public void loop(){
-        double speed = 0.5;
-        if (gamepad2.dpad_up){
-            speed +=-0.1;
-        }else if (gamepad2.dpad_up){
-            speed -=0.1;
+        boolean pressed = false;
+
+        shooter.setTargetVelocity(target);
+
+        if (gamepad2.dpad_up && !pressed){
+            target +=50;
+            pressed = true;
+        }else if (gamepad2.dpad_down && !pressed){
+            target -=50;
+            pressed = true;
         }
         if (gamepad2.left_trigger_pressed){
             intake.IntakeMotorMax();
@@ -50,9 +60,11 @@ public class TestCode extends OpMode {
         } else {
             shooter.stop();
         }
+        telemetry.addData("vol",shooter.getVelocity());
 
         telemetry.addData("Shooter speed", shooter.getVelocity());
         telemetry.addData("Ready", shooter.isReady());
+        telemetry.addData("target",target);
 
 //        if (gamepad1.right_trigger_pressed){
 //            shooter.ShooterMotorMax();
