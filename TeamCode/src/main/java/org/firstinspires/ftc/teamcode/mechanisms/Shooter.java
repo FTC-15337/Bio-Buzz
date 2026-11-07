@@ -21,8 +21,8 @@ public class Shooter {
             shooter = hwmap.get(DcMotorEx.class, "shooter");
             shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             shooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-//            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,
-//                    new PIDFCoefficients(3, 0.001, 0, 15));
+            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,
+                    new PIDFCoefficients(15, 0.001, 0, 14.3));
         }
 
         public void spinUp() {
