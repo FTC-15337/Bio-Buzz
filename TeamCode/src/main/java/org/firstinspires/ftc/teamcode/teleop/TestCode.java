@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.mechanisms.Nudge;
 import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
 import org.firstinspires.ftc.teamcode.mechanisms.Turret;
+import org.firstinspires.ftc.teamcode.mechanisms.autoAlign;
 
 import java.lang.annotation.Target;
 
@@ -19,6 +20,7 @@ public class TestCode extends OpMode {
     Intake intake = new Intake();
     Drive drive = new Drive();
     Nudge nudge = new Nudge();
+    autoAlign AutoAlign  = new autoAlign();
     FlywheelTunerTutorial flywheel = new FlywheelTunerTutorial();
     Shooter shooter = new Shooter();
     public void init(){
@@ -27,10 +29,6 @@ public class TestCode extends OpMode {
         drive.init(hardwareMap);
         nudge.init(hardwareMap);
         shooter.init(hardwareMap);
-
-
-
-
     }
     double target = 1025;
 
@@ -41,10 +39,10 @@ public class TestCode extends OpMode {
         shooter.setTargetVelocity(target);
 
         if (gamepad2.dpad_up && !pressed){
-            target +=50;
+            target += 50;
             pressed = true;
         }else if (gamepad2.dpad_down && !pressed){
-            target -=50;
+            target -= 50;
             pressed = true;
         }
         if (gamepad2.left_trigger_pressed){
@@ -59,6 +57,9 @@ public class TestCode extends OpMode {
             shooter.spinUp();
         } else {
             shooter.stop();
+        }
+        if (gamepad1.bWasPressed()) {
+            AutoAlign.loop();
         }
         telemetry.addData("vol",shooter.getVelocity());
 
