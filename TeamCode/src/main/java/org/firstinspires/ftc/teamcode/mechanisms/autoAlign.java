@@ -1,18 +1,11 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
-import com.pedropathing.localization.Localizer;
-import com.pedropathing.math.Pose;
-import com.pedropathing.revhub.localizers.PinpointConfig;
-import com.pedropathing.revhub.localizers.PinpointLocalizer;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
-import org.firstinspires.ftc.teamcode.pedro.Constants;
 @TeleOp
 public class autoAlign extends OpMode {
     private GoBildaPinpointDriver pinpoint;
@@ -28,9 +21,6 @@ public class autoAlign extends OpMode {
                 GoBildaPinpointDriver.EncoderDirection.REVERSED);
         pinpoint.resetPosAndIMU();
         drive.init(hardwareMap);
-
-
-
     }
 
     @Override
