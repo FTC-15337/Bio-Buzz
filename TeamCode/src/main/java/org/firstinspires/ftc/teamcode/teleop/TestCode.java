@@ -3,19 +3,24 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.R;
 import org.firstinspires.ftc.teamcode.mechanisms.Drive;
 import org.firstinspires.ftc.teamcode.mechanisms.FlywheelTunerTutorial;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.mechanisms.Nudge;
+import org.firstinspires.ftc.teamcode.mechanisms.RevRadius;
 import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
 import org.firstinspires.ftc.teamcode.mechanisms.Turret;
 import org.firstinspires.ftc.teamcode.mechanisms.autoAlign;
+
+
 
 import java.lang.annotation.Target;
 
 @TeleOp
 public class TestCode extends OpMode {
-
+    RevRadius radius = new RevRadius();
     Turret turret = new Turret();
     Intake intake = new Intake();
     Drive drive = new Drive();
@@ -53,11 +58,7 @@ public class TestCode extends OpMode {
         } else {
             intake.IntakeMotorStop();
         }
-        if (gamepad2.right_bumper) {
-            shooter.reverse();
-        } else {
-            shooter.stop();
-        }
+
         if (gamepad2.x) {
             shooter.spinUp();
             if (shooter.isReady()) {

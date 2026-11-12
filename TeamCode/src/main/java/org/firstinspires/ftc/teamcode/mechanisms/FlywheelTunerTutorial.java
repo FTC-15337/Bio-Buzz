@@ -1,9 +1,6 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -43,7 +40,7 @@ public class FlywheelTunerTutorial extends OpMode{
     public void loop() {
         //  get all our gamepad commands
         // set target velocity
-        // uptade telemetry
+        // update telemetry
 
         if (gamepad1.yWasPressed()) {
             if (curTargetVelocity == highVelocity) {

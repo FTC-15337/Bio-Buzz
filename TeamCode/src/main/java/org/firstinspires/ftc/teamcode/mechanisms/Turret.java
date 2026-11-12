@@ -11,7 +11,7 @@ public class Turret {
 
     public void init(HardwareMap hwmap){
         turretMotor = hwmap.get(DcMotor.class,"turret");
-        turretMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODERS);
+        turretMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         turretMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
