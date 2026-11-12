@@ -21,6 +21,8 @@ public class goToPos {
         drive.init(hwmap);
     }
     public void run(double rotate){
+        pinpoint.update();
+
         double shootY = 111.13;
         double shootX = 58.04;
         double robotX = pinpoint.getPosX(DistanceUnit.INCH);
@@ -31,14 +33,9 @@ public class goToPos {
         double run = shootY-robotY;
         double rise = shootX-robotX;
 
-        if (Math.abs(run)>tol) {
-            run *= KP;
+        run  = Math.abs(run)  > tol ? run * KP  : 0;
+        rise = Math.abs(rise) > tol ? rise * KP : 0;
 
-        }
-        if (Math.abs(rise)>tol){
-            rise *=KP;
-        }
-
-        drive.driveFieldRelative(rise, run, rotate);
+        drive.driveFieldRelative(-rise, -run, rotate);
     }
 }

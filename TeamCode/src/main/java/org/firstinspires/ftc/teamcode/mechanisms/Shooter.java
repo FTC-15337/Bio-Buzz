@@ -32,13 +32,13 @@ public class Shooter {
             voltTimer.reset();
             shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,
 
-                    new PIDFCoefficients(20, 0, 0,17 * 12 / v ));
+                    new PIDFCoefficients(20, 0, 0,19 * 12 / v ));
         }
 
         public void pidf(){
             if (voltTimer.seconds() > 2) {
                 double v = battery.getVoltage();
-                shooter.setVelocityPIDFCoefficients(20, 0, 0, 17 * 12.0 / v);
+                shooter.setVelocityPIDFCoefficients(20, 0, 0, 19 * 12.0 / v);
                 voltTimer.reset();
             }
 
