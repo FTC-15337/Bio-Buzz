@@ -3,6 +3,9 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.mechanisms.Drive;
 import org.firstinspires.ftc.teamcode.mechanisms.FlywheelTunerTutorial;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
@@ -10,8 +13,9 @@ import org.firstinspires.ftc.teamcode.mechanisms.Nudge;
 import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
 import org.firstinspires.ftc.teamcode.mechanisms.Turret;
 import org.firstinspires.ftc.teamcode.mechanisms.autoAlign;
+import org.firstinspires.ftc.teamcode.mechanisms.goToPos;
 
-import java.lang.annotation.Target;
+// inside your loop:
 
 @TeleOp
 public class TestCode extends OpMode {
@@ -22,19 +26,25 @@ public class TestCode extends OpMode {
     Nudge nudge = new Nudge();
     autoAlign AutoAlign  = new autoAlign();
     FlywheelTunerTutorial flywheel = new FlywheelTunerTutorial();
+    goToPos go = new goToPos();
     Shooter shooter = new Shooter();
     public void init(){
-//        turret.init(hardwareMap);
         intake.init(hardwareMap);
         drive.init(hardwareMap);
         nudge.init(hardwareMap);
         shooter.init(hardwareMap);
+        AutoAlign.init(hardwareMap);
+        VoltageSensor battery = hardwareMap.voltageSensor.iterator().next();
+        ElapsedTime voltTimer = new ElapsedTime();
+        go.init(hardwareMap);
+
     }
     double target = 1025;
 
-
+boolean ready1 =false;
     public void loop(){
         boolean pressed = false;
+        shooter.pidf();
 
         shooter.setTargetVelocity(target);
 
@@ -58,8 +68,24 @@ public class TestCode extends OpMode {
         } else {
             shooter.stop();
         }
-        if (gamepad1.bWasPressed()) {
-            AutoAlign.loop();
+        if (gamepad1.b) {
+            go.run(AutoAlign.run());
+
+        }
+        if (gamepad2.x){
+            shooter.spinUp();
+            if (shooter.isReady()) {
+                ready1 = true;
+            } if (ready1){
+                shooter.spinUp();
+                intake.IntakeMotorMax();
+                nudge.NudgeMotorReverse();
+            }
+        } else if (gamepad2.xWasReleased()) {
+            ready1 = false;
+            shooter.stop();
+            intake.IntakeMotorStop();
+            nudge.NudgeMotorStop();
         }
         telemetry.addData("vol",shooter.getVelocity());
 
