@@ -64,7 +64,7 @@ boolean ready1 =false;
             intake.IntakeMotorStop();
         }
         if (gamepad2.right_bumper) {
-            shooter.spinUp();
+            shooter.reverse();
         } else {
             shooter.stop();
         }
