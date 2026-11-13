@@ -76,6 +76,7 @@ public class TestAutonomousRed extends OpMode {
 
 
             case SHOOT_PRELOAD:
+                shooter.setTargetVelocity(1025);
                shooter.spinUp();
 
                 if (shooter.isReady() && !feeding) {
@@ -95,6 +96,7 @@ public class TestAutonomousRed extends OpMode {
                    follower.follow(goLeftPath);
                    setPathState(PathState.GO_LEFT);
                }
+                telemetry.addData("vel", shooter.getVelocity());
             break;
 
            case GO_LEFT:
