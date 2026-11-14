@@ -49,8 +49,8 @@ public class TestAutonomousBlue extends OpMode {
     PathState pathState;
     private final Pose startPose = new Pose(82.97136091321244,132.97136091321244,Math.toRadians(270));
     private final Pose shootingPose = new Pose(83.25,110.3,Math.toRadians(270));
-    private final Pose endPose = new Pose(132.14,44.78,Math.toRadians(270));
-    private final Pose goRightPose = new Pose(119.04,109.91,Math.toRadians(180));
+    private final Pose endPose = new Pose(132.14,44.78,Math.toRadians(180));
+    private final Pose goRightPose = new Pose(119.04,109.91,Math.toRadians(270));
     private Path driveAwayPath;
     private Path goForwardPath;
     private Path goRightPath;
