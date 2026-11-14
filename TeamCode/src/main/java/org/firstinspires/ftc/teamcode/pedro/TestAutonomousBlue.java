@@ -19,21 +19,22 @@ import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
 
 public class TestAutonomousBlue extends OpMode {
     private Follower follower;
-    // Tracks which path the robot is on.
+    //tracks what path quasar is on
     private Timer pathTimer;
-    // Tracks how much time it takes for the path
+    // tracks how much time it takes for the path
     Shooter shooter = new Shooter();
     // invoking the shooter
     Nudge nudge = new Nudge();
     // invoking the kick
     Intake intake = new Intake();
-    // invoking the intake
+    //invoking the intake
 
     public enum PathState{
-        // assigning the states
+        //assigning the states
         IDLE,
-        // The IDLE mode means the Follower is not currently sending commands to the drive motors
+        //The IDLE mode means the Follower is not currently sending commands to the drive motors
         GO_FORWARD,
+        GO_RIGHT,
 
 
         DRIVE_AWAY,
@@ -46,11 +47,13 @@ public class TestAutonomousBlue extends OpMode {
 
     }
     PathState pathState;
-    private final Pose startPose = new Pose(56,8,Math.toRadians(90));
-    private final Pose shootingPose = new Pose(58.09,31.22,Math.toRadians(90));
-    private final Pose endPose = new Pose(7.63,98.75,Math.toRadians(180));
+    private final Pose startPose = new Pose(82.97136091321244,132.97136091321244,Math.toRadians(270));
+    private final Pose shootingPose = new Pose(83.25,110.3,Math.toRadians(270));
+    private final Pose endPose = new Pose(132.14,44.78,Math.toRadians(270));
+    private final Pose goRightPose = new Pose(119.04,109.91,Math.toRadians(180));
     private Path driveAwayPath;
     private Path goForwardPath;
+    private Path goRightPath;
     private boolean feeding = false;
 
 
@@ -73,26 +76,37 @@ public class TestAutonomousBlue extends OpMode {
 
 
             case SHOOT_PRELOAD:
+                shooter.setTargetVelocity(1025);
                 shooter.spinUp();
 
                 if (shooter.isReady() && !feeding) {
                     feeding = true;
                     pathTimer.reset();
                 }
-                if (feeding && pathTimer.seconds() < 2.0) {
-                    nudge.NudgeMotorMax();
+                if (feeding && pathTimer.seconds() < 6.0) {
+                    nudge.NudgeMotorReverse();
                     intake.IntakeMotorMax();
                 }
 
-                if (feeding && pathTimer.seconds() >= 2.0) {
+                if (feeding && pathTimer.seconds() >= 6.0) {
                     nudge.NudgeMotorStop();
                     intake.IntakeMotorStop();
                     shooter.stop();
 
+                    follower.follow(goRightPath);
+                    setPathState(PathState.GO_RIGHT);
+                }
+                telemetry.addData("vel", shooter.getVelocity());
+                break;
+
+            case GO_RIGHT:
+                if(!follower.isBusy()){
                     follower.follow(driveAwayPath);
                     setPathState(PathState.DRIVE_AWAY);
+
                 }
                 break;
+
 
             case DRIVE_AWAY:
                 if (!follower.isBusy()) {
@@ -126,16 +140,10 @@ public class TestAutonomousBlue extends OpMode {
         follower = Constants.create(hardwareMap);
         follower.setPose(startPose);
 
-        driveAwayPath = Paths.line(shootingPose, endPose)
-                .linear(shootingPose, endPose);
+        driveAwayPath = Paths.line(goRightPose, endPose)
+                .linear(goRightPose, endPose);
         goForwardPath = Paths.line(startPose,shootingPose) .linear(startPose,shootingPose);
-
-
-
-
-
-
-
+        goRightPath = Paths.line(shootingPose,goRightPose) .linear(shootingPose,goRightPose);
 
     }
     public void loop(){
