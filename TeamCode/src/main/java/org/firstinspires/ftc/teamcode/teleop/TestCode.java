@@ -74,15 +74,7 @@ public class TestCode extends OpMode {
             shooter.stop();
         }
 
-            boolean b = false;
 
-
-        if (gamepad1.b) {
-            b = true;
-            go.update(b,-gamepad1.left_stick_y,gamepad1.left_stick_x,AutoAlign.run());
-
-
-        }
         if (gamepad2.x){
             shooter.spinUp();
             if (shooter.isReady()) {
@@ -127,14 +119,18 @@ public class TestCode extends OpMode {
         else {
             nudge.NudgeMotorStop();
         }
-        double forward, rotate, strafe;
-        if (gamepad1.a){
+        double forward = -gamepad1.left_stick_y;
+        double rotate = gamepad1.right_stick_x;
+        double strafe = gamepad1.left_stick_x;
+
+        if (gamepad1.a) {
             drive.Reset();
         }
-        forward = -gamepad1.left_stick_y;
-        rotate = gamepad1.right_stick_x;
-        strafe = gamepad1.left_stick_x;
-        drive.driveFieldRelative(forward,strafe,rotate);
 
+        if (gamepad1.b) {
+            go.update(true, 0, 0, 0);
+        } else {
+            go.update(false, forward, strafe, rotate);
+        }
     }
 }

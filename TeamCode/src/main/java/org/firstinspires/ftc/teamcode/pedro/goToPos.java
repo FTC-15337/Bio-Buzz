@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.mechanisms.PoseStorage;
+import com.pedropathing.drivetrain.DrivePowers;
+import com.pedropathing.follower.ManualDrive;
 
 
 public class goToPos {
@@ -31,7 +33,13 @@ public class goToPos {
             }
         } else {
             holding = false;
-            follower.manual(forward, strafe, turn);
+            DrivePowers powers = ManualDrive.fieldCentric(
+                    forward,
+                    strafe,
+                    turn,
+                    follower.pose().heading()
+            );
+            follower.manual(powers);
         }
         follower.update();
     }
