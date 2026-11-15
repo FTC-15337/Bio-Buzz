@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
 
+import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
@@ -13,9 +14,13 @@ import org.firstinspires.ftc.teamcode.mechanisms.Nudge;
 import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
 import org.firstinspires.ftc.teamcode.mechanisms.Turret;
 import org.firstinspires.ftc.teamcode.mechanisms.autoAlign;
-import org.firstinspires.ftc.teamcode.mechanisms.goToPos;
+import org.firstinspires.ftc.teamcode.pedro.goToPos;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
+import org.firstinspires.ftc.teamcode.mechanisms.PoseStorage;
 
-// inside your loop:
+
 
 @TeleOp
 public class TestCode extends OpMode {
@@ -39,9 +44,11 @@ public class TestCode extends OpMode {
         go.init(hardwareMap);
 
     }
+
+
     double target = 1025;
 
-    boolean ready1 =false;
+    boolean ready1 = false;
     public void loop(){
         boolean pressed = false;
         shooter.pidf();
@@ -49,13 +56,6 @@ public class TestCode extends OpMode {
 
         shooter.setTargetVelocity(target);
 
-        if (gamepad2.dpad_up && !pressed){
-            target += 50;
-            pressed = true;
-        }else if (gamepad2.dpad_down && !pressed){
-            target -= 50;
-            pressed = true;
-        }
         if (gamepad2.left_trigger_pressed){
             intake.IntakeMotorMax();
 
@@ -66,11 +66,21 @@ public class TestCode extends OpMode {
         }
         if (gamepad2.right_bumper) {
             shooter.spinUp();
-        } else {
+
+        } else if (gamepad2.left_bumper){
+            shooter.rev();
+        }
+            else {
             shooter.stop();
         }
+
+            boolean b = false;
+
+
         if (gamepad1.b) {
-            drive.driveFieldRelative(-gamepad1.left_stick_y,gamepad1.left_stick_x,AutoAlign.run());
+            b = true;
+            go.update(b,-gamepad1.left_stick_y,gamepad1.left_stick_x,AutoAlign.run());
+
 
         }
         if (gamepad2.x){

@@ -49,7 +49,7 @@ public class TestAutonomousBlue extends OpMode {
     PathState pathState;
     private final Pose startPose = new Pose(82.97136091321244,132.97136091321244,Math.toRadians(270));
     private final Pose shootingPose = new Pose(83.25,110.3,Math.toRadians(270));
-    private final Pose endPose = new Pose(132.14,44.78,Math.toRadians(180));
+    private final Pose endPose = new Pose(127.92,44.78,Math.toRadians(180));
     private final Pose goRightPose = new Pose(119.04,109.91,Math.toRadians(270));
     private Path driveAwayPath;
     private Path goForwardPath;
@@ -76,19 +76,19 @@ public class TestAutonomousBlue extends OpMode {
 
 
             case SHOOT_PRELOAD:
-                shooter.setTargetVelocity(1025);
+                shooter.setTargetVelocity(1050);
                 shooter.spinUp();
 
                 if (shooter.isReady() && !feeding) {
                     feeding = true;
                     pathTimer.reset();
                 }
-                if (feeding && pathTimer.seconds() < 6.0) {
+                if (feeding && pathTimer.seconds() < 1.8) {
                     nudge.NudgeMotorReverse();
                     intake.IntakeMotorMax();
                 }
 
-                if (feeding && pathTimer.seconds() >= 6.0) {
+                if (feeding && pathTimer.seconds() >= 1.8) {
                     nudge.NudgeMotorStop();
                     intake.IntakeMotorStop();
                     shooter.stop();
@@ -133,6 +133,8 @@ public class TestAutonomousBlue extends OpMode {
         pathTimer.reset();
     }
     public void init(){
+
+
         pathTimer = new Timer();
         shooter.init(hardwareMap);
         nudge.init(hardwareMap);

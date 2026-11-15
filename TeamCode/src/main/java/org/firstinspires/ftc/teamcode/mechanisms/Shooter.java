@@ -16,7 +16,7 @@ public class Shooter {
 
 
     private DcMotorEx shooter;
-    private double targetVelocity = 1025;
+    private double targetVelocity = 1050;
 
     private double tolerance = 15;
     private VoltageSensor battery;
@@ -32,13 +32,13 @@ public class Shooter {
         voltTimer.reset();
         shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,
 
-                new PIDFCoefficients(20, 0, 0,15.5 * 12 / v ));
+                new PIDFCoefficients(20, 0, 0,16 * 12 / v ));
     }
 
     public void pidf(){
         if (voltTimer.seconds() > 2) {
             double v = battery.getVoltage();
-            shooter.setVelocityPIDFCoefficients(20, 0, 0, 15.5 * 12.0 / v);
+            shooter.setVelocityPIDFCoefficients(20, 0, 0, 16 * 12.0 / v);
             voltTimer.reset();
         }
 
@@ -50,6 +50,9 @@ public class Shooter {
 
     public void stop() {
         shooter.setVelocity(0);
+    }
+    public void rev(){
+        shooter.setVelocity(-400);
     }
 
     public boolean isReady() {
